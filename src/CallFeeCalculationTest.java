@@ -49,7 +49,25 @@ public class CallFeeCalculationTest {
 		assertEquals(1, ccc.surviceCodeMap.get("090-1234-0001").size());
 		assertEquals(2, ccc.surviceCodeMap.get("090-1234-0002").size());
 		assertEquals(0, ccc.surviceCodeMap.get("090-1234-7777").size());
-
+		assertEquals("C1", ccc.surviceCodeMap.get("090-1234-0002").get(0));
+		assertEquals("E1", ccc.surviceCodeMap.get("090-1234-0002").get(1));
+		assertEquals(2, ccc.survicePhoneNumber.get("090-1234-0001").size());
+		assertEquals(0, ccc.survicePhoneNumber.get("090-1234-7777").size());
+		assertEquals("090-1234-0001", ccc.survicePhoneNumber.get("090-1234-0002").get(0));
+		assertEquals("090-1234-0003", ccc.survicePhoneNumber.get("090-1234-0002").get(1));
+		assertEquals(2, ccc.callLogMap.get("090-1234-0002").size());
+	}
+	
+	@Test
+	public void 基本料金とその他適用料金のテスト() {
+		CallFeeCalculation ccc = new CallFeeCalculation();
+		List<String> logList = ccc.readLog();
+		ccc.registerLogData(logList);
+		Fee f = ccc.calculateBasicFee("090-1234-0002");
+		
+		assertEquals(1300, f.basicFee);
+		assertEquals(true, f.familyCam);
+		assertEquals(true, f.afternoonCam);
 	}
 
 }
