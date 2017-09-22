@@ -35,6 +35,7 @@ public class CallFeeCalculationTest {
 		assertEquals("0 *************************", logList.get(19));
 	}
 
+
 	@Test
 	public void 登録されたデータのテスト() {
 		CallFeeCalculation ccc = new CallFeeCalculation();
@@ -57,14 +58,14 @@ public class CallFeeCalculationTest {
 		assertEquals("090-1234-0003", ccc.survicePhoneNumber.get("090-1234-0002").get(1));
 		assertEquals(2, ccc.callLogMap.get("090-1234-0002").size());
 	}
-	
+
 	@Test
 	public void 基本料金とその他適用料金のテスト() {
 		CallFeeCalculation ccc = new CallFeeCalculation();
 		List<String> logList = ccc.readLog();
 		ccc.registerLogData(logList);
 		Fee f = ccc.calculateBasicFee("090-1234-0002");
-		
+
 		assertEquals(1300, f.basicFee);
 		assertEquals(true, f.familyCam);
 		assertEquals(true, f.afternoonCam);

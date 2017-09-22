@@ -1,4 +1,3 @@
-
 public class Fee {
 	int basicFee;
 	boolean familyCam;
